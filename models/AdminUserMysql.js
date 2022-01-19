@@ -1,7 +1,6 @@
-const {database: {getConnection, DataTypes}} = require("sc-borneo");
-const database = require("../configs/database");
+const {model, DataTypes} = require("./MysqlBaseModel");
 
-const Model = getConnection(database.borneoMysqlDb.key).instance.define('AdminUser', {
+const Model = model.define('AdminUser', {
   id: {type: DataTypes.INTEGER, field: 'id', primaryKey: true},
   name: {type: DataTypes.STRING},
   middle_name: DataTypes.STRING,
@@ -13,6 +12,5 @@ const Model = getConnection(database.borneoMysqlDb.key).instance.define('AdminUs
   setterMethods: {},
   getterMethods: {}
 });
-
 
 module.exports = Model;
