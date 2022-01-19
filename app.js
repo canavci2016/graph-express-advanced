@@ -3,14 +3,8 @@ var borneoServer = new borneo();
 var {graphqlHTTP} = require('express-graphql');
 var {buildSchema} = require('graphql');
 var fs = require('fs');
-borneo.addConnection("borneoMysqlDb", {
-  host: "127.0.0.1",
-  database: "borneo",
-  user: "root",
-  password: "23101993",
-  driver: "mysql",
-  port: "3307"
-});
+const con = {host: "127.0.0.1", database: "borneo", user: "root", password: "23101993", driver: "mysql", port: "3307"};
+borneo.addConnection("borneoMysqlDb", con);
 
 var graphResolver = require('./graph/resolver');
 
