@@ -1,0 +1,22 @@
+type Query {
+    hello: String
+    rollThreeDice:[Int!]
+    rollDice(numDice: Int!, numSides: Int): [Int],
+    getDie(numSides: Int): RandomDie,
+    userDetail(id: Int): User,
+    allUsers:[RandomDie!]
+}
+
+type RandomDie {
+    name:String
+    numSides: Int!
+    rollOnce: Int!
+    roll(numRolls: Int!): [String!]
+}
+
+
+type User {
+    name:String
+    last_name: String!
+    friends(skip: Int!, take:Int!): [User!]
+}
