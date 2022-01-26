@@ -4,7 +4,7 @@ module.exports = {
     key: "borneoMysqlDb",
     connection: {
       host: "127.0.0.1",
-      database: "borneo",
+      database: "graphql",
       user: "root",
       password: "23101993",
       driver: "mysql",

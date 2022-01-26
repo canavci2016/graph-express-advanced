@@ -1,0 +1,34 @@
+version: "3.0"
+
+services:
+  dbMysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 23101993
+    ports:
+      - "3307:3306"
+    networks:
+      - borneo
+  dbMssql:
+    image: mcr.microsoft.com/mssql/server:2019-CU14-ubuntu-20.04
+    restart: always
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: 23101993Can.
+    ports:
+      - "1433:1433"
+    networks:
+      - borneo
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - borneo
+    environment:
+      ADMINER_DEFAULT_SERVER: dbMysql
+networks:
+  borneo:
