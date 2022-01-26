@@ -1,10 +1,9 @@
-var RandomDie = require('./RandomDie');
-var User = require('./User');
-
+var RandomDie = require("./RandomDie");
+var User = require("./User");
 
 const root = {
   hello: () => {
-    return 'Hello world!';
+    return "Hello world!";
   },
   rollThreeDice: () => {
     return [23, 23];
@@ -12,14 +11,20 @@ const root = {
   rollDice: (c) => {
     return [23, 23];
   },
-  getDie: ({numSides}) => {
+  getDie: ({ numSides }) => {
     return new RandomDie(numSides || 6);
   },
 
-  userDetail: async ({id}) => {
+  userDetail: async ({ id }) => {
     const model = new User();
     await model.find(id);
 
+    return model;
+  },
+
+  createUser: async ({ user }) => {
+    const model = new User();
+    await model.createModel(user);
     return model;
   },
 

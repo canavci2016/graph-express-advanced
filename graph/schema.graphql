@@ -1,22 +1,32 @@
 type Query {
-    hello: String
-    rollThreeDice:[Int!]
-    rollDice(numDice: Int!, numSides: Int): [Int],
-    getDie(numSides: Int): RandomDie,
-    userDetail(id: Int): User,
-    allUsers:[RandomDie!]
+  hello: String
+  rollThreeDice: [Int!]
+  rollDice(numDice: Int!, numSides: Int): [Int]
+  getDie(numSides: Int): RandomDie
+  userDetail(id: Int): User
+  allUsers: [RandomDie!]
+}
+
+type Mutation {
+  createUser(user: UserInput): User
 }
 
 type RandomDie {
-    name:String
-    numSides: Int!
-    rollOnce: Int!
-    roll(numRolls: Int!): [String!]
+  name: String
+  numSides: Int!
+  rollOnce: Int!
+  roll(numRolls: Int!): [String!]
 }
 
-
 type User {
-    name:String
-    last_name: String!
-    friends(skip: Int!, take:Int!): [User!]
+  id: Int!
+  name: String
+  last_name: String!
+  friends(skip: Int!, take: Int!): [User!]
+}
+
+input UserInput {
+  name: String!
+  last_name: String!
+  email_address: String!
 }
