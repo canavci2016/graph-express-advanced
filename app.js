@@ -10,14 +10,24 @@ borneo.addConnection(
   database.borneoMysqlDb.connection
 );
 
+borneoServer.expressApp.use((req, res, next) => {
+  req.user = Date.now().toString();
+  next();
+});
+
 borneoServer.expressApp.use(
   "/graphql",
-  graphqlHTTP({
-    schema: buildSchema(
-      fs.readFileSync("./graph/schema.graphql", { encoding: "utf8", flag: "r" })
-    ),
-    rootValue: require("./graph/resolver"),
-    graphiql: true,
+  graphqlHTTP((request) => {
+    return {
+      schema: buildSchema(
+        fs.readFileSync("./graph/schema.graphql", {
+          encoding: "utf8",
+          flag: "r",
+        })
+      ),
+      rootValue: require("./graph/resolver"),
+      graphiql: true,
+    };
   })
 );
 

@@ -22,7 +22,9 @@ const root = {
     return model;
   },
 
-  createUser: async ({ user }) => {
+  createUser: async (params, request) => {
+    const user = params.user;
+
     const model = new User();
     await model.createModel(user);
     return model;
@@ -30,7 +32,7 @@ const root = {
 
   allUsers: () => {
     return [new RandomDie(6), new RandomDie(2)];
-  }
+  },
 };
 
 module.exports = root;
