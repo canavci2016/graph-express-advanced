@@ -5,14 +5,14 @@ const root = {
   hello: () => {
     return "Hello world!";
   },
+
   rollThreeDice: () => {
     return [23, 23];
   },
-  userDetail: async ({ id }) => {
-    const model = new User();
-    await model.find(id);
 
-    return model;
+  userDetail: async ({ id }) => {
+    const user = await AdminUserMysql.findByPk(id);
+    return new User(user);
   },
 
   createUser: async (params, req) => {
@@ -22,10 +22,8 @@ const root = {
       throw new Error("user cant be null");
     }
 
-    const user = params.user;
-
-    const model = new User();
-    await model.createModel(user);
+    const user = await AdminUserMysql.create(params.user);
+    const model = new User(user);
     return model;
   },
 
