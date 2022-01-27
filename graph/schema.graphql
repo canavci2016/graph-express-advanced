@@ -1,8 +1,6 @@
 type Query {
   hello: String
   rollThreeDice: [Int!]
-  rollDice(numDice: Int!, numSides: Int): [Int]
-  getDie(numSides: Int): RandomDie
   userDetail(id: Int): User
   allUsers: [User!]
 }

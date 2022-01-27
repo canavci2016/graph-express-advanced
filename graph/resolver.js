@@ -1,5 +1,5 @@
-var RandomDie = require("./RandomDie");
 var User = require("./User");
+const AdminUserMysql = require("../models/AdminUserMysql");
 
 const root = {
   hello: () => {
@@ -8,13 +8,6 @@ const root = {
   rollThreeDice: () => {
     return [23, 23];
   },
-  rollDice: (c) => {
-    return [23, 23];
-  },
-  getDie: ({ numSides }) => {
-    return new RandomDie(numSides || 6);
-  },
-
   userDetail: async ({ id }) => {
     const model = new User();
     await model.find(id);
@@ -23,11 +16,12 @@ const root = {
   },
 
   createUser: async (params, req) => {
-    console.log(request.user);
+    console.log(req.user);
 
     if (!req.user) {
       throw new Error("user cant be null");
     }
+    
     const user = params.user;
 
     const model = new User();
@@ -35,8 +29,9 @@ const root = {
     return model;
   },
 
-  allUsers: () => {
-    return [new RandomDie(6), new RandomDie(2)];
+  allUsers: async () => {
+    const userList = await AdminUserMysql.findAll();
+    return userList.map((c) => new User(c));
   },
 };
 
