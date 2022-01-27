@@ -2,7 +2,7 @@ type Query {
   hello: String
   rollThreeDice: [Int!]
   userDetail(id: Int): User
-  allUsers: [User!]
+  allUsers(skip: Int, take: Int): [User!]
 }
 
 type Mutation {

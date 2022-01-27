@@ -21,7 +21,7 @@ const root = {
     if (!req.user) {
       throw new Error("user cant be null");
     }
-    
+
     const user = params.user;
 
     const model = new User();
@@ -29,8 +29,12 @@ const root = {
     return model;
   },
 
-  allUsers: async () => {
-    const userList = await AdminUserMysql.findAll();
+  allUsers: async (params) => {
+    const { skip = 0, take = 10 } = params;
+    const userList = await AdminUserMysql.findAll({
+      offset: skip,
+      limit: take,
+    });
     return userList.map((c) => new User(c));
   },
 };
