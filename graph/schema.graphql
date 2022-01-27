@@ -4,7 +4,7 @@ type Query {
   rollDice(numDice: Int!, numSides: Int): [Int]
   getDie(numSides: Int): RandomDie
   userDetail(id: Int): User
-  allUsers: [RandomDie!]
+  allUsers: [User!]
 }
 
 type Mutation {
@@ -22,6 +22,7 @@ type User {
   id: Int!
   name: String
   last_name: String!
+  email_address: String!
   friends(skip: Int!, take: Int!): [User!]
 }
 

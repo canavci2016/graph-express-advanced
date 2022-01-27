@@ -1,7 +1,9 @@
 const AdminUserMysql = require("../models/AdminUserMysql");
 
 class User {
-  constructor() {}
+  constructor(user = null) {
+    this.user = user;
+  }
 
   async find(id) {
     this.user = await AdminUserMysql.findByPk(id);
@@ -19,18 +21,20 @@ class User {
     return this.user.middle_name;
   }
 
+  email_address() {
+    return this.user.email_address;
+  }
+
   async createModel(user) {
     this._user = await AdminUserMysql.create(user);
   }
 
   async friends({ skip, take }) {
-    console.log(skip, take);
-    const userList = await AdminUserMysql.findAll();
-    return userList.map((c) => {
-      let usr = new User();
-      usr.user = c;
-      return usr;
+    const userList = await AdminUserMysql.findAll({
+      offset: skip,
+      limit: take,
     });
+    return userList.map((c) => new User(c));
   }
 
   get user() {
