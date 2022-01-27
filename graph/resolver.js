@@ -22,7 +22,12 @@ const root = {
     return model;
   },
 
-  createUser: async (params, request) => {
+  createUser: async (params, req) => {
+    console.log(request.user);
+
+    if (!req.user) {
+      throw new Error("user cant be null");
+    }
     const user = params.user;
 
     const model = new User();

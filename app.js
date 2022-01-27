@@ -13,14 +13,7 @@ borneo.addConnection(
   database.borneoMysqlDb.connection
 );
 
-borneoServer.expressApp.use((req, res, next) => {
-  if (req.body?.variables?.Token) {
-    const token = req.body.variables.Token;
-    console.log("token is : " + token);
-  }
-  req.user = Date.now().toString();
-  next();
-});
+borneoServer.expressApp.use(require('./middlewares/auth'));
 
 borneoServer.expressApp.use(
   "/graphql",
