@@ -7,13 +7,7 @@ type Query {
 
 type Mutation {
   createUser(user: UserInput): User
-}
-
-type RandomDie {
-  name: String
-  numSides: Int!
-  rollOnce: Int!
-  roll(numRolls: Int!): [String!]
+  deleteUser(id: Int): User
 }
 
 type User {

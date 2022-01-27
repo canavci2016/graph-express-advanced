@@ -10,9 +10,14 @@ const root = {
     return [23, 23];
   },
 
-  userDetail: async ({ id }) => {
+  deleteUser: async ({ id }, req) => {
     const user = await AdminUserMysql.findByPk(id);
-    return new User(user);
+
+    if (!user) throw new Error("User doesnt exist");
+
+    const res = await user.destroy();
+
+    return res;
   },
 
   createUser: async (params, req) => {
@@ -25,6 +30,11 @@ const root = {
     const user = await AdminUserMysql.create(params.user);
     const model = new User(user);
     return model;
+  },
+
+  userDetail: async ({ id }) => {
+    const user = await AdminUserMysql.findByPk(id);
+    return new User(user);
   },
 
   allUsers: async (params) => {
